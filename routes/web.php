@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/{erro?}', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/', [\App\Http\Controllers\LoginController::class, 'autenticar'])->name('login');
 
-Route::middleware('autenticacao:padrao')->prefix('/app')->group(function (){
+Route::middleware('autenticacao:padrao')->prefix('/app')->group(/**
+ *
+ */ function (){
    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
    Route::get('/sair', [\App\Http\Controllers\LoginController::class, 'sair'])->name('sair');
    Route::get('/cadastro', [\App\Http\Controllers\ClienteController::class, 'index'])->name('cadastro');

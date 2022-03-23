@@ -3,6 +3,7 @@
 @section('titulo')
 
 @section('conteudo')
+
 <div class="container">
     <div class=" row justify-content-center">
         @if(session('mensagem'))

@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ *
+ */
 class LoginController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index(Request $request) {
         $erro = '';
 
@@ -21,6 +28,10 @@ class LoginController extends Controller
         return view('login', ['erro' =>$erro]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function autenticar(Request $request) {
         //regras de validação
         $regras = [
@@ -55,6 +66,10 @@ class LoginController extends Controller
             return redirect()->route('login', ['erro' => 1]);
         }
     }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function sair() {
         session_destroy();
         return redirect()->route('login');

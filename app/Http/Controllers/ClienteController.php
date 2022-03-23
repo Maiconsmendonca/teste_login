@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
+/**
+ *
+ */
 class ClienteController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index() {
         return view('app.clienteadicionar');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function cadastrar(Request $request) {
 
         $msg = '';
@@ -50,11 +60,18 @@ class ClienteController extends Controller
         return redirect()->action([\App\Http\Controllers\ClienteController::class, 'index'])->with('mensagem', 'Cliente adicionado com sucesso!');
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function listar() {
         return view('app.clientelistar');
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function localizar(Request $request)
     {
         $clientes = Cliente::where('nome', 'like', '%'.$request->input('nome').'%')
@@ -71,6 +88,10 @@ class ClienteController extends Controller
         return view('app.clientelocalizar', ['clientes' => $clientes]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function editar($id) {
 
         $clientes = Cliente::find($id);
@@ -78,6 +99,10 @@ class ClienteController extends Controller
         return view('app.clienteeditar', ['clientes' => $clientes]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function confirmar(Request $request) {
 
         if ($request->input('_token') != '' && $request->input('id') != ''){
@@ -89,6 +114,10 @@ class ClienteController extends Controller
         return redirect()->action([\App\Http\Controllers\ClienteController::class, 'index'])->with('mensagem', 'Cliente alterado com sucesso!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function excluir($id) {
 
         Cliente::find($id)->delete();
